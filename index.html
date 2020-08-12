@@ -14,36 +14,36 @@
             <div class="col-md-6">
                 <div class="pin-generator half-width">
                     <input id="random-pin" class="form-control" type="text">
-                    <button onclick="getRandomNumber()" id="click-pin" class="generate-btn">Generate Pin</button>
+                    <button onclick="getRandomNumber();" id="click-pin" class="generate-btn">Generate Pin</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input class="form-control" type="text">
+                    <input id="calc-number" class="form-control text-right" type="text" placeholder="0" value="">
                     <div class="numbers">
                         <div  class="calc-body">
-                            <div id="upper-case" class="calc-button-row">
-                              <div class="button">7</div>
-                              <div class="button">8</div>
-                              <div class="button">9</div>
+                            <div class="calc-button-row">
+                              <div id="BtnSeven" onclick="pushCalc(BtnSeven);" class="button">7</div>
+                              <div id="BtnEight" onclick="pushCalc(BtnEight);" class="button">8</div>
+                              <div id="BtnNine" onclick="pushCalc(BtnNine);" class="button">9</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">4</div>
-                              <div class="button">5</div>
-                              <div class="button">6</div>
+                              <div id="BtnFour" onclick="pushCalc(BtnFour);" class="button">4</div>
+                              <div id="BtnFive" onclick="pushCalc(BtnFive);" class="button">5</div>
+                              <div id="BtnSix" onclick="pushCalc(BtnSix)" class="button">6</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">1</div>
-                              <div class="button">2</div>
-                              <div class="button">3</div>
+                              <div id="BtnOne" onclick="pushCalc(BtnOne);" class="button">1</div>
+                              <div id="BtnTwo" onclick="pushCalc(BtnTwo);" class="button">2</div>
+                              <div id="BtnThree" onclick="pushCalc(BtnThree);" class="button">3</div>
                             </div>
                               <div class="calc-button-row">
-                                <div class="button"><</div>
-                                <div class="button">0</div>
-                                <div class="button">C</div>
+                                <div id="BtnBack" onclick="pushCalc(BtnBack);" class="button"><</div>
+                                <div id="BtnZero" onclick="pushCalc(BtnZero);" class="button">0</div>
+                                <div id="BtnClear" onclick="pushCalc(BtnClear);" class="button">C</div>
                             </div>
                             <div>
-                                <button type="submit" class="submit-btn">Submit</button>
+                                <button id="sub-btn" type="submit" class="submit-btn">Submit</button>
                                 <p class="action-left">3 try left</p>
                             </div>
                     </div>
@@ -58,21 +58,31 @@
 
 
     <script>
-
-    function getRandomNumber(start, range){
-        const pinInput = document.getElementById('random-pin');
-         const randomNumber = parseInt(pinInput.value);
-            let getRandom = Math.floor((Math.random()* range) + start);
-
-        while (getRandom > range) {
-            getRandom = Math.floor((Math.random()* range) + start);
-        }
-        return getRandom;
-        }
-        console.log(getRandomNumber(1000, 9000))
-        
+//generate pin
+        document.getElementById('click-pin').addEventListener('click', function() {
+            const pin = getRandomNumber();
+            document.getElementById('random-pin').value = pin;
+          });
+          // generate pin
+          function getRandomNumber() {
+            const getRandom = Math.floor(1000 + Math.random() * 9000);
+            return getRandom;
+          }
 
 
+
+// calculator
+function pushCalc(Btn) {
+    const btn = document.getElementById("Btn");
+    const btnNumber = parseInt(btn.innerText);
+    const calcNumber = document.getElementById('calc-number').value;
+    document.getElementById('calc-number').value = calcNumber + btnNumber;
+    
+}
+
+
+
+    
 
 
     </script> 
