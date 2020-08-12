@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input id="random-pin" class="form-control" type="text">
+                    <input id="random-pin" class="form-control" type="text" value="">
                     <button onclick="getRandomNumber();" id="click-pin" class="generate-btn">Generate Pin</button>
                 </div>
             </div>
@@ -23,24 +24,24 @@
                     <div class="numbers">
                         <div  class="calc-body">
                             <div class="calc-button-row">
-                              <div id="BtnSeven" onclick="pushCalc(BtnSeven);" class="button">7</div>
-                              <div id="BtnEight" onclick="pushCalc(BtnEight);" class="button">8</div>
-                              <div id="BtnNine" onclick="pushCalc(BtnNine);" class="button">9</div>
+                              <div id="BtnSeven" onclick="pushCalc(7);" class="button">7</div>
+                              <div id="BtnEight" onclick="pushCalc(8);" class="button">8</div>
+                              <div id="BtnNine" onclick="pushCalc(9);" class="button">9</div>
                             </div>
                             <div class="calc-button-row">
-                              <div id="BtnFour" onclick="pushCalc(BtnFour);" class="button">4</div>
-                              <div id="BtnFive" onclick="pushCalc(BtnFive);" class="button">5</div>
-                              <div id="BtnSix" onclick="pushCalc(BtnSix)" class="button">6</div>
+                              <div id="BtnFour" onclick="pushCalc(4);" class="button">4</div>
+                              <div id="BtnFive" onclick="pushCalc(5);" class="button">5</div>
+                              <div id="BtnSix" onclick="pushCalc(6)" class="button">6</div>
                             </div>
                             <div class="calc-button-row">
-                              <div id="BtnOne" onclick="pushCalc(BtnOne);" class="button">1</div>
-                              <div id="BtnTwo" onclick="pushCalc(BtnTwo);" class="button">2</div>
-                              <div id="BtnThree" onclick="pushCalc(BtnThree);" class="button">3</div>
+                              <div id="BtnOne" onclick="pushCalc(1);" class="button">1</div>
+                              <div id="BtnTwo" onclick="pushCalc(2);" class="button">2</div>
+                              <div id="BtnThree" onclick="pushCalc(3);" class="button">3</div>
                             </div>
                               <div class="calc-button-row">
-                                <div id="BtnBack" onclick="pushCalc(BtnBack);" class="button"><</div>
-                                <div id="BtnZero" onclick="pushCalc(BtnZero);" class="button">0</div>
-                                <div id="BtnClear" onclick="pushCalc(BtnClear);" class="button">C</div>
+                                <div id="BtnBack" onclick="" class="button"><</div>
+                                <div id="BtnZero" onclick="pushCalc(0);" class="button">0</div>
+                                <div id="BtnClear" onclick="" class="button">C</div>
                             </div>
                             <div>
                                 <button id="sub-btn" type="submit" class="submit-btn">Submit</button>
@@ -51,13 +52,17 @@
             </div>
         </div>
         <div class="notify-section">
-            <p class="notify">❌ Pin Didn't Match, Please try again</p>
-            <p class="notify">✅ Pin Matched... Secret door is opening for you</p>
+            <p id="unmatched" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="matched" class="notify">✅ Pin Matched... Secret door is opening for you</p>
         </div>
     </div>
-
-
+ 
+ 
     <script>
+//pin Matching
+document.getElementById('unmatched').style.display = 'none'
+document.getElementById('matched').style.display = 'none'
+
 //generate pin
         document.getElementById('click-pin').addEventListener('click', function() {
             const pin = getRandomNumber();
@@ -67,24 +72,52 @@
           function getRandomNumber() {
             const getRandom = Math.floor(1000 + Math.random() * 9000);
             return getRandom;
+
+            document.getElementById('unmatched').style.display = 'none'
+            document.getElementById('matched').style.display = 'none'
+  
           }
-
-
-
+ 
+ 
+ 
 // calculator
 function pushCalc(Btn) {
-    const btn = document.getElementById("Btn");
-    const btnNumber = parseInt(btn.innerText);
     const calcNumber = document.getElementById('calc-number').value;
-    document.getElementById('calc-number').value = calcNumber + btnNumber;
-    
+    document.getElementById('calc-number').value = calcNumber + Btn;
+ 
+}
+
+//submitbutton
+function submitBtn() {
+    const pin = document.getElementById('random-pin').value;
+    const calcNumber = document.getElementById('calc-number').value;
+
+
+    if (pin == calcNumber) {
+document.getElementById('unmatched').style.display = 'none'
+document.getElementById('matched').style.display = 'block'
+document.getElementById('calc-number').value = ''
+document.getElementById('random-pin').value = ''
+
+document.getElementById('random-pin').textContent = 'pin matched'
+
+    }
+    else{
+        document.getElementById('unmatched').style.display = 'block'
+        document.getElementById('matched').style.display = 'none'  
+        document.getElementById('random-pin').textContent = 'pin unmatched'
+    }
 }
 
 
 
-    
 
-
+ 
+ 
+ 
+ 
+ 
+ 
     </script> 
     </section>
 </body>
